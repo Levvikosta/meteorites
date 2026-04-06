@@ -122,7 +122,7 @@ while is_running:
             screen.blit(heart, (i * 40, 0))
 
         # Отрисовка очков
-        score_text = font_small.render(f"Score: {points}", True, (255, 255, 255))
+        score_text = font_small.render(f"Score: {points}", True, WHITE)
         screen.blit(score_text, (size[0] - 120, 10))
 
     elif mode == "final_scene":
