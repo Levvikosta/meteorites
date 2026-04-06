@@ -75,7 +75,7 @@ while is_running:
                     lasers.add(Laser(starship.rect.midtop))
                     laser_sound.play()
 
-            elif mode == "final_scene":
+            elif mode == "final_scene" or mode == "win":
                 if event.key == pg.K_r:
                     reset_game()
                 elif event.key == pg.K_ESCAPE:
@@ -110,6 +110,8 @@ while is_running:
         for hit in hits:
             met_las_sound.play()
             points += 10
+            if points >= 500:
+                mode = "win"
 
         # Отрисовка
         screen.blit(background, (0, 0))
@@ -128,7 +130,7 @@ while is_running:
     elif mode == "final_scene":
         # Затемняем фон
         overlay = pg.Surface(size)
-        overlay.fill((0, 0, 0))
+        overlay.fill(BLACK)
         screen.blit(overlay, (0, 0))
 
         # Текст "GAME OVER"
@@ -151,6 +153,23 @@ while is_running:
         exit_rect = exit_text.get_rect(center=(size[0] // 2, size[1] // 2 + 100))
         screen.blit(exit_text, exit_rect)
 
+    elif mode == "win":
+        # Меняем фон
+        overlay = pg.Surface(size)
+        overlay.fill(YELLOW)
+        screen.blit(overlay, (0, 0))
+
+        # Экран победы
+        win_text = font_large.render("Вы победили! ", True, RED)
+        win_rect = win_text.get_rect(center=(size[0] // 2, size[1] // 2 - 100))
+        res_text = font_medium.render(f"Вы набрали очков: {points}", True, RED)
+        res_rect = win_text.get_rect(center=(size[0] // 2, size[1] // 2 - 30))
+        screen.blit(win_text, win_rect)
+
+        # Подсказка о перезапуске
+        restart_text = font_medium.render("Нажмите R для перезапуска ", True, BLUE)
+        restart_rect = restart_text.get_rect(center=(size[0] // 2, size[1] // 2 + 40))
+        screen.blit(restart_text, restart_rect)
 
     pg.display.flip()
     clock.tick(FPS)

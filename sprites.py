@@ -56,7 +56,7 @@ class Starship(pg.sprite.Sprite):
         self.hp = 3
 
         self.rect = self.image.get_rect()
-        self.rect.midbottom= (SCREEN_WIDTH//2-25, SCREEN_HEIGHT)
+        self.rect.midbottom= (SCREEN_WIDTH//2, SCREEN_HEIGHT)
 
 
     def update(self):
@@ -65,6 +65,13 @@ class Starship(pg.sprite.Sprite):
             self.rect.x -= 2
         if keys[pg.K_RIGHT]:
             self.rect.x += 2
+
+        # чтобы корабль не выходил за пределы экрана
+        if self.rect.left < 0:
+            self.rect.left = 0
+        if self.rect.right >= (SCREEN_WIDTH-50):
+            self.rect.right = (SCREEN_WIDTH-50)
+
 
     def draw(self, target_surf):
         if self.hp > 0:
