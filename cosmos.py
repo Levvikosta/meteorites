@@ -83,7 +83,7 @@ while is_running:
 
     if mode == "meteorites":
         # Спавн метеоритов
-        if random.randint(1, 50) == 1:
+        if random.randint(1, 100) == 1:
             meteorites.add(Meteor())
 
         # Обновление объектов
@@ -108,7 +108,7 @@ while is_running:
         hits = pg.sprite.groupcollide(lasers, meteorites, True, True)
         for hit in hits:
             met_las_sound.play()
-            points += 10  # начисляем очки за уничтожение метеорита
+            points += 10
 
         # Отрисовка
         screen.blit(background, (0, 0))
@@ -127,7 +127,6 @@ while is_running:
     elif mode == "final_scene":
         # Затемняем фон
         overlay = pg.Surface(size)
-        overlay.set_alpha(180)
         overlay.fill((0, 0, 0))
         screen.blit(overlay, (0, 0))
 
@@ -151,11 +150,6 @@ while is_running:
         exit_rect = exit_text.get_rect(center=(size[0] // 2, size[1] // 2 + 100))
         screen.blit(exit_text, exit_rect)
 
-        # Анимация мигания (необязательно)
-        if pg.time.get_ticks() % 1000 < 500:
-            hint_text = font_small.render(">> Press R to restart <<", True, (255, 255, 0))
-            hint_rect = hint_text.get_rect(center=(size[0] // 2, size[1] - 50))
-            screen.blit(hint_text, hint_rect)
 
     pg.display.flip()
     clock.tick(FPS)
