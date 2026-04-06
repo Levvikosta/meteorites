@@ -92,7 +92,7 @@ while is_running:
         starship.update()
         lasers.update()
 
-        # Проверка касания метеоритами дна
+        # Проверка касания метеоритами базы - нижнего края экрана 
         for meteor in meteorites:
             if meteor.rect.bottom >= size[1] and (meteor.rect.centerx >0 and meteor.rect.centerx < SCREEN_WIDTH):
                 heart_count -= 1
@@ -126,18 +126,18 @@ while is_running:
         screen.blit(score_text, (size[0] - 120, 10))
 
     elif mode == "final_scene":
-        # Затемняем фон
+        # Конец игры. Затемняем фон
         overlay = pg.Surface(size)
         overlay.fill((0, 0, 0))
         screen.blit(overlay, (0, 0))
 
         # Текст "GAME OVER"
-        game_over_text = font_large.render("GAME OVER", True, (255, 0, 0))
+        game_over_text = font_large.render("Игра окончена", True, (255, 0, 0))
         text_rect = game_over_text.get_rect(center=(size[0] // 2, size[1] // 2 - 100))
         screen.blit(game_over_text, text_rect)
 
         # Текст с финальным счётом
-        score_text = font_medium.render(f"Your score: {points}", True, (255, 255, 255))
+        score_text = font_medium.render(f"Your score: {points}", True, WHITE)
         score_rect = score_text.get_rect(center=(size[0] // 2, size[1] // 2 - 30))
         screen.blit(score_text, score_rect)
 
