@@ -26,13 +26,16 @@ class Meteor(pg.sprite.Sprite):
 class Laser(pg.sprite.Sprite):
     def __init__(self, pos):
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.image.load("laser.png")
+        self.image = pg.image.load("images/laser.png")
         self.image = pg.transform.scale(self.image, (30, 30))
         self.rect = self.image.get_rect(midbottom=pos)
         self.speed = 2
 
     def update(self):
         self.rect.y -= self.speed
+        if self.rect.bottom < 0:
+            self.kill()
+
 
 
 class Starship(pg.sprite.Sprite):
