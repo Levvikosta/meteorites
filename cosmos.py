@@ -122,7 +122,7 @@ while is_running:
             screen.blit(heart, (i * 40, 0))
 
         # Отрисовка очков
-        score_text = font_small.render(f"Score: {points}", True, (255, 255, 255))
+        score_text = font_small.render(f"Score: {points}", True, WHITE)
         screen.blit(score_text, (size[0] - 120, 10))
 
     elif mode == "final_scene":
@@ -132,22 +132,22 @@ while is_running:
         screen.blit(overlay, (0, 0))
 
         # Текст "GAME OVER"
-        game_over_text = font_large.render("GAME OVER", True, (255, 0, 0))
+        game_over_text = font_large.render("GAME OVER", True, RED)
         text_rect = game_over_text.get_rect(center=(size[0] // 2, size[1] // 2 - 100))
         screen.blit(game_over_text, text_rect)
 
         # Текст с финальным счётом
-        score_text = font_medium.render(f"Your score: {points}", True, (255, 255, 255))
+        score_text = font_medium.render(f"Your score: {points}", True, WHITE)
         score_rect = score_text.get_rect(center=(size[0] // 2, size[1] // 2 - 30))
         screen.blit(score_text, score_rect)
 
         # Подсказка о перезапуске
-        restart_text = font_medium.render("Press R to restart", True, (100, 255, 100))
+        restart_text = font_medium.render("Press R to restart", True, GREEN)
         restart_rect = restart_text.get_rect(center=(size[0] // 2, size[1] // 2 + 40))
         screen.blit(restart_text, restart_rect)
 
         # Подсказка о выходе
-        exit_text = font_small.render("Press ESC to exit", True, (200, 200, 200))
+        exit_text = font_small.render("Press ESC to exit", True, GREY)
         exit_rect = exit_text.get_rect(center=(size[0] // 2, size[1] // 2 + 100))
         screen.blit(exit_text, exit_rect)
 
