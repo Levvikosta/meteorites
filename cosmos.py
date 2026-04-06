@@ -84,7 +84,8 @@ while is_running:
     if mode == "meteorites":
         # Спавн метеоритов
         if random.randint(1, 100) == 1:
-            meteorites.add(Meteor())
+            rand_met = random.randint(1,2)
+            meteorites.add(Meteor(rand_met))
 
         # Обновление объектов
         meteorites.update()

@@ -4,23 +4,31 @@ from settings import *
 
 
 class Meteor(pg.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, rand_met =1):
         pg.sprite.Sprite.__init__(self)
-
-        self.image = pg.image.load("images/meteorBrown.png")
-        size = random.randint(30, 70)
+        if rand_met == 1:
+            self.image = pg.image.load("images/meteorBrown.png")
+            size = random.randint(30, 70)
+            self.speedx = random.randint(-2, 2)
+            self.speedy = random.randint(1, 2)
+        else:
+            self.image = pg.image.load("images/meteorite.png")
+            size = random.randint(70, 100)
+            self.speedx = random.randint(-1, 1)
+            self.speedy = 1
 
         self.image = pg.transform.scale(self.image, (size, size))
-
         self.rect = self.image.get_rect()
         self.rect.topleft = (random.randint(0, SCREEN_WIDTH - size), 0)
 
-        self.speedx = random.randint(-2, 2)
-        self.speedy = random.randint(1, 2)
 
     def update(self):
         self.rect.x -= self.speedx
         self.rect.y += self.speedy
+        if self.rect.top >SCREEN_HEIGHT:
+            self.kill()
+
+
 
 
 class Laser(pg.sprite.Sprite):
