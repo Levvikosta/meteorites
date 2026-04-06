@@ -94,7 +94,7 @@ while is_running:
 
         # Проверка касания метеоритами дна
         for meteor in meteorites:
-            if meteor.rect.bottom >= size[1]:
+            if meteor.rect.bottom >= size[1] and (meteor.rect.centerx >0 and meteor.rect.centerx < SCREEN_WIDTH):
                 heart_count -= 1
                 meteorites.remove(meteor)
                 hit_sound.play()
